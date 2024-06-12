@@ -3,25 +3,34 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "TINA_PUBLIC_IS_LOCAL=true tinacms dev -c \"next dev\"",
+    "build": "tinacms build && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "dr:build": "pnpm dlx declarative-routing build",
+    "dr:build:watch": "pnpm dlx declarative-routing build --watch"
   },
   "dependencies": {
+    "clsx": "^2.1.1",
+    "next": "14.2.3",
+    "query-string": "^9.0.0",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.2.3"
+    "tailwind-merge": "^2.3.0",
+    "tinacms": "^1.6.4",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
+    "@tailwindcss/typography": "^0.5.13",
+    "@tinacms/cli": "^1.5.46",
+    "@types/node": "^20.14.2",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.3",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.3"
+    "typescript": "^5"
   },
   "packageManager": "pnpm@9.2.0+sha512.98a80fd11c2e7096747762304106432b3ddc67dcf54b5a8c01c93f68a2cd5e05e6821849522a06fb76284d41a2660d5e334f2ee3bbf29183bf2e739b1dafa771"
 }
