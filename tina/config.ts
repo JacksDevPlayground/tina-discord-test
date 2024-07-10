@@ -10,11 +10,25 @@ const branch =
 export default defineConfig({
   branch,
 
-  tinaioConfig: {
-    frontendUrlOverride: "https://app.tinajs.dev",
-    identityApiUrlOverride: "https://identity.tinajs.dev",
-    contentApiUrlOverride: "https://content.tinajs.dev",
-    assetsApiUrlOverride: "https://assets-api.tinajs.dev",
+  // tinaioConfig: {
+  //   frontendUrlOverride: "https://app.tinajs.dev",
+  //   identityApiUrlOverride: "https://identity.tinajs.dev",
+  //   contentApiUrlOverride: "https://content.tinajs.dev",
+  //   assetsApiUrlOverride: "https://assets-api.tinajs.dev",
+  // },
+  admin: {
+    authHooks: {
+      onLogin: async ({ token }) => {
+        console.log("onLogin Auth Hook Hit");
+
+        //  When the user logs in enter preview mode
+        location.href = `/api/draft?token=${token.id_token}&slug=` + location;
+      },
+      onLogout: async () => {
+        // When the user logs out exit preview mode
+        location.href = `/api/disable-draft?slug=` + location;
+      },
+    },
   },
 
   // Get this from tina.io
@@ -39,6 +53,14 @@ export default defineConfig({
         name: "post",
         label: "Posts",
         path: "content/posts",
+        ui: {
+          allowedActions: {
+            createNestedFolder: false,
+          },
+          router(args) {
+            return `/posts/${args.document._sys.breadcrumbs.join("/")}`;
+          },
+        },
         fields: [
           {
             type: "string",
@@ -48,16 +70,17 @@ export default defineConfig({
             required: true,
           },
           {
+            type: "boolean",
+            label: "Draft",
+            name: "draft",
+          },
+          {
             type: "rich-text",
             name: "body",
             label: "Body",
             isBody: true,
           },
         ],
-        ui: {
-          // This is an DEMO router. You can remove this to fit your site
-          router: ({ document }) => `/demo/blog/${document._sys.filename}`,
-        },
       },
     ],
   },

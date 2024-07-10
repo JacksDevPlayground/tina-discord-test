@@ -11,6 +11,7 @@
     "dr:build:watch": "pnpm dlx declarative-routing build --watch"
   },
   "dependencies": {
+    "@tinacms/auth": "^1.0.5",
     "clsx": "^2.1.1",
     "next": "14.2.3",
     "query-string": "^9.0.0",
