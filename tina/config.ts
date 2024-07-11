@@ -21,11 +21,12 @@ export default defineConfig({
         console.log("onLogin Auth Hook Hit");
 
         //  When the user logs in enter preview mode
-        location.href = `/api/draft?token=${token.id_token}&slug=` + location;
+        location.href =
+          `/api/draft?token=${token.id_token}&slug=` + location?.pathname;
       },
       onLogout: async () => {
         // When the user logs out exit preview mode
-        location.href = `/api/disable-draft?slug=` + location;
+        location.href = `/api/disable-draft?slug=` + location?.pathname;
       },
     },
   },
