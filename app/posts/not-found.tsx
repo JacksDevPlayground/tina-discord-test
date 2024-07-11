@@ -1,5 +1,6 @@
+"use client";
 import React from "react";
 
 export default function NotFound() {
-  return <div>NotFound</div>;
+  return <div>Not Found</div>;
 }

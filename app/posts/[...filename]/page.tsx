@@ -2,6 +2,9 @@ import client from "@/tina/__generated__/client";
 import React from "react";
 import ClientPage from "./client-page";
 import { draftMode } from "next/headers";
+import { notFound } from "next/navigation";
+
+const isDev = process.env.NODE_ENV === "development";
 
 export default async function PostPage({
   params,
@@ -10,7 +13,10 @@ export default async function PostPage({
 }) {
   const { isEnabled } = draftMode();
 
-  console.log("Draft mode", isEnabled);
+  if (!isDev && !isEnabled) {
+    console.log("Draft mode", isEnabled);
+    return notFound();
+  }
 
   const data = await client.queries.post({
     relativePath: `${params.filename?.join("/")}.md`,
