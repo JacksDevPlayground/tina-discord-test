@@ -1,6 +1,6 @@
 ---
 title: Test 1
-draft: true
+draft: false
 ---
 
 asdasda
