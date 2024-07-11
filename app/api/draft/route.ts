@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
     return new Response("Invalid request", { status: 400 });
   }
 
-  const redirectUrl = slug ? `/${slug}` : "/";
+  const redirectUrl = slug ? `${slug}` : "/";
 
   if (process.env.NODE_ENV === "development") {
     // Enter preview-mode in local development
