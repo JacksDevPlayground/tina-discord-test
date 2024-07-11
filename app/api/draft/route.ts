@@ -1,7 +1,7 @@
 // route handler enabling draft mode
 import { draftMode } from "next/headers";
 import { isUserAuthorized } from "@tinacms/auth";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 // `/api/preview/enter?token=${token.id_token}&slug=` + location
 
@@ -15,10 +15,12 @@ export async function GET(request: NextRequest) {
     return new Response("Invalid request", { status: 400 });
   }
 
+  const redirectUrl = slug ? `/${slug}` : "/";
+
   if (process.env.NODE_ENV === "development") {
     // Enter preview-mode in local development
     draftMode().enable();
-    return Response.redirect(slug);
+    return NextResponse.redirect(redirectUrl);
   }
 
   // Check tina cloud token
@@ -29,7 +31,7 @@ export async function GET(request: NextRequest) {
 
   if (isAuthorizedRes) {
     draftMode().enable();
-    return Response.redirect(slug);
+    return NextResponse.redirect(redirectUrl);
   }
 
   return Response.json({ message: "Invalid token" }, { status: 401 });

@@ -1,6 +1,12 @@
 import { draftMode } from "next/headers";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
+  const slug = request.nextUrl.searchParams.get("slug");
+  console.log("HITTING /api/preview/exit", slug);
+
   draftMode().disable();
-  return new Response("Draft mode is disabled");
+  // Construct the URL for redirection
+  const redirectUrl = slug ? `/${slug}` : "/";
+  return NextResponse.redirect(redirectUrl);
 }
