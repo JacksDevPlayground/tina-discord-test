@@ -15,6 +15,7 @@ export default async function PostListPage({ searchParams }: any) {
   const forwardOptions: PostConnectionQueryVariables = {
     first: 1,
     after: after || cursorMap[currentPage - 1] || null,
+    filter: { draft: { eq: false } },
   };
   const posts = await client.queries.postConnection(forwardOptions);
 
