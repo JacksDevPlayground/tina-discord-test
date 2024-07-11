@@ -9,7 +9,6 @@ const branch =
 
 export default defineConfig({
   branch,
-
   // tinaioConfig: {
   //   frontendUrlOverride: "https://app.tinajs.dev",
   //   identityApiUrlOverride: "https://identity.tinajs.dev",
@@ -79,6 +78,9 @@ export default defineConfig({
             name: "body",
             label: "Body",
             isBody: true,
+            parser: {
+              type: "mdx",
+            },
           },
         ],
       },
