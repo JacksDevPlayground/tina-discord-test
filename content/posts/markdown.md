@@ -1,5 +1,6 @@
 ---
 title: TinaMarkdown Component
+draft: false
 ---
 
 # Example of the TinaMarkdown Component
